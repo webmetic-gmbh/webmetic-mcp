@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "webmetic": {
+      "type": "http",
+      "url": "https://mcp.webmetic.de/mcp"
+    }
+  }
+}

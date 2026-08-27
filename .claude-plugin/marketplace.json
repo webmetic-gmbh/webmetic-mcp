@@ -1,0 +1,15 @@
+{
+  "name": "webmetic",
+  "owner": {
+    "name": "Webmetic GmbH",
+    "email": "support@webmetic.de",
+    "url": "https://webmetic.de"
+  },
+  "plugins": [
+    {
+      "name": "webmetic",
+      "source": "./",
+      "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale und Berichte direkt im KI-Assistenten. / Identify the companies visiting your website, surface buying signals, and generate reports right in your AI assistant."
+    }
+  ]
+}

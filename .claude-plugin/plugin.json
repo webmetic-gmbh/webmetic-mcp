@@ -1,0 +1,13 @@
+{
+  "name": "webmetic",
+  "version": "0.2.0",
+  "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale und Berichte direkt im KI-Assistenten. / Identify the companies visiting your website, surface buying signals, and generate reports right in your AI assistant.",
+  "author": {
+    "name": "Webmetic GmbH",
+    "email": "support@webmetic.de",
+    "url": "https://webmetic.de"
+  },
+  "homepage": "https://webmetic.de/mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "visitor-intelligence", "b2b", "leads", "webmetic"]
+}
