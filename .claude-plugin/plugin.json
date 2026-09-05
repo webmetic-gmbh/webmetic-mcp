@@ -1,7 +1,7 @@
 {
   "name": "webmetic",
-  "version": "0.2.0",
-  "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale und Berichte direkt im KI-Assistenten. / Identify the companies visiting your website, surface buying signals, and generate reports right in your AI assistant.",
+  "version": "0.3.0",
+  "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale, Berichte und Ansprechpartner direkt im KI-Assistenten. / Identify the companies visiting your website, surface buying signals, generate reports, and find contacts right in your AI assistant.",
   "author": {
     "name": "Webmetic GmbH",
     "email": "support@webmetic.de",

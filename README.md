@@ -23,7 +23,9 @@
 Webmetic identifiziert die Unternehmen, die Ihre Website besuchen. Über
 diesen MCP-Server beantwortet Ihr KI-Assistent Fragen wie „Welche
 Unternehmen waren diese Woche auf unserer Website?" live aus Ihren
-Webmetic-Daten. Der Zugriff ist rein lesend.
+Webmetic-Daten. Die Besucherdaten sind rein lesend; auf Wunsch findet der
+Assistent zusätzlich Ansprechpartner bei einem erkannten Unternehmen und
+schaltet E-Mail oder Rufnummer aus Ihrem Credit-Guthaben frei.
 
 Der Server läuft gehostet unter `mcp.webmetic.de` — es gibt nichts zu
 installieren. Dieses Repository enthält das offizielle Claude-Code-Plugin
@@ -38,13 +40,14 @@ rohe Schlüssel, ohne „Bearer"-Präfix. Behandeln Sie ihn wie ein Passwort.
 
 ### Claude Code: Plugin (empfohlen)
 
-Das Plugin bringt den MCP-Server und drei fertige Skills mit:
+Das Plugin bringt den MCP-Server und vier fertige Skills mit:
 
 | Skill | Was er tut | Beispiel-Frage |
 |---|---|---|
 | `wochenbericht` | Wochenbericht: Unternehmen, Top-Seiten, Quellen, Kaufsignale, Empfehlungen | „Erstell mir den Wochenbericht." |
 | `hot-leads` | Rangliste der kaufbereitesten Unternehmen, jede Einstufung mit Verhalten belegt | „Wen soll der Vertrieb diese Woche anrufen?" |
 | `abm-check` | Zielkundenliste gegen die Besucher abgleichen, bis zu 50 auf einmal | „Prüf meine Zielkundenliste: BMW, Siemens, Krones …" |
+| `ansprechpartner` | Ansprechpartner bei einem Unternehmen, das die Website besucht hat; E-Mail oder Rufnummer nur auf Wunsch (Credits) | „Wen kann ich bei Musterbau anrufen?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -127,6 +130,7 @@ dort noch nicht verfügbar.
 - „Was hat [Unternehmen] bei uns angeschaut?"
 - „Wer hat ein Formular abgeschickt oder auf unsere Telefonnummer geklickt?"
 - „Welche Unternehmen kamen über die LinkedIn-Kampagne?"
+- „Wer sind die Ansprechpartner im Marketing bei [Unternehmen]?"
 - „Schreib mir den Wochenbericht: Besucher, Top-Seiten, Quellen, Branchen."
 - „Prüf meine Zielkundenliste: [Namen oder Domains]"
 
@@ -140,6 +144,8 @@ dort noch nicht verfügbar.
 | `get_company_activity` | Was hat X angesehen? Kompletter Besuchsverlauf inklusive Events |
 | `get_visit_highlights` | Intensive Besuche, wiederkehrende Besucher, Erstbesucher |
 | `check_accounts` | ABM: bis zu 50 Zielkunden in einem Aufruf abgleichen |
+| `find_contacts` | Ansprechpartner bei einem Unternehmen: Name, Position, welche Kontaktdaten vorliegen. Suche kostenlos, Filter nach Abteilung und Seniorität |
+| `reveal_contact` | E-Mail (mit LinkedIn) oder Rufnummer eines Ansprechpartners freischalten: 2 bzw. 8 Credits aus Ihrem Guthaben, der Client fragt vor jedem Aufruf nach |
 
 Deutsch funktioniert durchgehend: Umlaute, Schreibweisen wie „Muenchen",
 deutsche Datumsangaben („01.08.2026", „seit gestern") und deutsche
@@ -147,9 +153,13 @@ Firmennamen werden verstanden.
 
 ### Datenschutz
 
-Es werden Unternehmen identifiziert, niemals Personen. Formular-Inhalte
-werden nicht erfasst. Der Server ist rein lesend und in Deutschland
-gehostet. Der API-Schlüssel bleibt in Ihrer lokalen Client-Konfiguration.
+Besucher werden als Unternehmen identifiziert, niemals als Personen;
+Formular-Inhalte werden nicht erfasst. Ansprechpartner stammen aus einer
+separaten Kontaktdatenbank und werden nur auf Ihre ausdrückliche Frage zu
+einem benannten Unternehmen gesucht. Die Besucherdaten sind rein lesend; das
+Freischalten von Kontaktdaten kostet Credits und wird vom KI-Client vor jedem
+Aufruf bestätigt. Der Server ist in Deutschland gehostet, der API-Schlüssel
+bleibt in Ihrer lokalen Client-Konfiguration.
 
 ### Fehlerbilder
 
@@ -158,6 +168,8 @@ gehostet. Der API-Schlüssel bleibt in Ihrer lokalen Client-Konfiguration.
 | „API key was rejected" | Schlüssel prüfen: roh, ohne „Bearer", frisch aus dem Dashboard kopiert |
 | „not authorized for domain" | Domain-Schreibweise muss exakt dem Konto entsprechen (`www.`, Subdomain) |
 | „0 identified companies" | Kein Fehler: im Zeitraum gab es keine identifizierbaren Besuche. Zeitraum vergrößern |
+| „Complete the contact setup" | Ansprechpartner einmalig im Dashboard einrichten (Zielgruppe und Einwilligung), das schaltet auch die Willkommens-Credits frei |
+| „Not enough credits" | Guthaben im Dashboard aufladen; Suchen bleiben kostenlos, nur das Freischalten kostet |
 | Verbindung schlägt fehl | `https://mcp.webmetic.de/mcp` exakt so verwenden (mit `/mcp` am Ende) |
 
 Fragen? support@webmetic.de · Dokumentation: https://webmetic.de/mcp
@@ -168,8 +180,9 @@ Fragen? support@webmetic.de · Dokumentation: https://webmetic.de/mcp
 
 Webmetic identifies the companies visiting your website. Through this MCP
 server your AI assistant answers questions like "which companies visited
-our website this week?" live from your Webmetic data. Access is strictly
-read-only.
+our website this week?" live from your Webmetic data. Visitor data is
+read-only; on request the assistant also finds contacts at an identified
+company and reveals an e-mail or phone number from your credit balance.
 
 The server is hosted at `mcp.webmetic.de` — there is nothing to install.
 This repository ships the official Claude Code plugin and the setup for
@@ -184,13 +197,14 @@ raw key, no "Bearer" prefix. Treat it like a password.
 
 ### Claude Code: plugin (recommended)
 
-The plugin ships the MCP server plus three ready-made skills:
+The plugin ships the MCP server plus four ready-made skills:
 
 | Skill | What it does | Example prompt |
 |---|---|---|
 | `wochenbericht` | Weekly report: companies, top pages, sources, buying signals, recommendations | "Build me the weekly report." |
 | `hot-leads` | Ranks the most sales-ready companies, every rating backed by observed behavior | "Who should sales call this week?" |
 | `abm-check` | Matches a target-account list against your visitors, up to 50 at once | "Check my target accounts: BMW, Siemens, Krones …" |
+| `ansprechpartner` | Contacts at a company that visited your website; e-mail or phone only on request (credits) | "Who can I call at Musterbau?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -240,6 +254,7 @@ available for SSO yet.
 - "What did [company] look at on our site?"
 - "Who submitted a form or clicked our phone number?"
 - "Which companies came in through the LinkedIn campaign?"
+- "Who are the marketing contacts at [company]?"
 - "Write the weekly report: visitors, top pages, sources, industries."
 - "Check my target-account list: [names or domains]"
 
@@ -253,6 +268,8 @@ available for SSO yet.
 | `get_company_activity` | What did X look at? Full visit trail including events |
 | `get_visit_highlights` | Intensive visits, returning visitors, first-time visitors |
 | `check_accounts` | ABM: match up to 50 target accounts in one call |
+| `find_contacts` | Contacts at one company: name, position, which contact data is on file. Search is free, filters by department and seniority |
+| `reveal_contact` | Reveal a contact's e-mail (with LinkedIn) or phone number: 2 or 8 credits from your balance, the client asks before every call |
 
 German input works throughout: umlauts, spellings like "Muenchen", German
 date formats ("01.08.2026", "seit gestern"), and German company names are
@@ -260,9 +277,12 @@ all understood — and so is English.
 
 ### Privacy
 
-Webmetic identifies companies, never persons. Form contents are not
-captured. The server is read-only and hosted in Germany. Your API key
-stays in your local client configuration.
+Visitors are identified as companies, never as persons; form contents are
+not captured. Contacts come from a separate contact database and are only
+looked up when you explicitly ask for them at a named company. Visitor data
+is read-only; revealing contact data costs credits and is confirmed by your
+AI client before every call. The server is hosted in Germany and your API
+key stays in your local client configuration.
 
 ### Troubleshooting
 
@@ -271,6 +291,8 @@ stays in your local client configuration.
 | "API key was rejected" | Check the key: raw, no "Bearer", freshly copied from the dashboard |
 | "not authorized for domain" | Domain spelling must exactly match your account (`www.`, subdomain) |
 | "0 identified companies" | Not an error: no identifiable visits in the period. Widen the date range |
+| "Complete the contact setup" | Set up contacts once in the dashboard (target group and consent); this also unlocks the welcome credits |
+| "Not enough credits" | Top up credits in the dashboard; searches stay free, only revealing costs |
 | Connection fails | Use `https://mcp.webmetic.de/mcp` exactly (with `/mcp` at the end) |
 
 Questions? support@webmetic.de · Documentation: https://webmetic.de/mcp

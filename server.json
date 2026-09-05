@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
   "name": "de.webmetic/webmetic",
-  "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale und Berichte, rein lesend. / Identify the companies visiting your website, surface buying signals, and generate reports. Read-only.",
-  "version": "0.1.0",
+  "description": "Webmetic Visitor Intelligence: Firmenbesucher, Kaufsignale, Berichte (rein lesend) und Ansprechpartner (Credits). / Identify the companies visiting your website, surface buying signals, generate reports (read-only), and find contacts (credits).",
+  "version": "0.3.0",
   "websiteUrl": "https://webmetic.de/mcp",
   "remotes": [
     {

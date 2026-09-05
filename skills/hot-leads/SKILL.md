@@ -41,4 +41,7 @@ jede Einstufung mit konkretem Verhalten.
   statt „Firma".
 - Jede Einstufung mit beobachtetem Verhalten belegen, nie mit Vermutungen.
 - Webmetic identifiziert Unternehmen, keine Personen: keine
-  Ansprechpartner erfinden.
+  Ansprechpartner erfinden. Fragt der Nutzer nach Ansprechpartnern, für
+  das jeweilige Unternehmen `find_contacts` nutzen; E-Mail oder Rufnummer
+  nur per `reveal_contact` freischalten, wenn der Nutzer das ausdrücklich
+  will (kostet Credits).
