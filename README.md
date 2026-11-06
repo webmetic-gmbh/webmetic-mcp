@@ -23,9 +23,11 @@
 Webmetic identifiziert die Unternehmen, die Ihre Website besuchen. Über
 diesen MCP-Server beantwortet Ihr KI-Assistent Fragen wie „Welche
 Unternehmen waren diese Woche auf unserer Website?" live aus Ihren
-Webmetic-Daten. Die Besucherdaten sind rein lesend; auf Wunsch findet der
-Assistent zusätzlich Ansprechpartner bei einem erkannten Unternehmen und
-schaltet E-Mail oder Rufnummer aus Ihrem Credit-Guthaben frei.
+Webmetic-Daten. Die Besucherdaten liest er nur; auf Wunsch findet der
+Assistent zusätzlich Ansprechpartner bei einem erkannten Unternehmen,
+schaltet E-Mail oder Rufnummer aus Ihrem Credit-Guthaben frei und richtet
+Ihr Konto ein: Zielkundenprofil, Ansprechpartner, Benutzer,
+Benachrichtigungen. Ein Konto legen Sie direkt im Anmeldefenster an.
 
 Der Server läuft gehostet unter `mcp.webmetic.de` — es gibt nichts zu
 installieren. Dieses Repository enthält das offizielle Claude-Code-Plugin
@@ -96,7 +98,7 @@ Kein API-Schlüssel nötig:
 1. **Einstellungen → Connectoren → Eigenen Connector hinzufügen**
 2. URL: `https://mcp.webmetic.de/mcp`
 3. **Hinzufügen**, dann **Verbinden**: Es öffnet sich das Webmetic-Login im
-   Browser. Anmelden, „Zugriff erlauben" — fertig.
+   Browser. Anmelden oder dort ein Konto anlegen, „Zugriff erlauben" — fertig.
 
 ### ChatGPT
 
@@ -146,6 +148,12 @@ dort noch nicht verfügbar.
 | `check_accounts` | ABM: bis zu 50 Zielkunden in einem Aufruf abgleichen |
 | `find_contacts` | Ansprechpartner bei einem Unternehmen: Name, Position, welche Kontaktdaten vorliegen. Suche kostenlos, Filter nach Abteilung und Seniorität |
 | `reveal_contact` | E-Mail (mit LinkedIn) oder Rufnummer eines Ansprechpartners freischalten: 2 bzw. 8 Credits aus Ihrem Guthaben, der Client fragt vor jedem Aufruf nach |
+| `get_account_status` | Ist das Konto bereit? Websites mit erstem und letztem Besuch, Plan, Zielkundenprofil, Ansprechpartner-Einwilligung, Benutzer, Benachrichtigungen, Credits |
+| `check_tracking_setup` | Liegt der Tracking-Code auf der Website, gehört er zu diesem Konto, lädt er vor dem Cookie-Banner? Öffnet die eigene Website in einem echten Browser |
+| `set_target_profile` | Zielkundenprofil einer Website speichern (Branchen, Größe, Umsatz, Region, Zielseite); Webmetic bewertet alle erkannten Unternehmen neu |
+| `enable_contacts` | Ansprechpartner freischalten: Einwilligung speichern und Willkommens-Credits gutschreiben, nach Ihrem ausdrücklichen Ja |
+| `invite_user` | Einen Benutzer anlegen; das Passwort kommt per E-Mail |
+| `create_email_alert` | Eine E-Mail-Benachrichtigung anlegen: neue, wiederkehrende oder interessierte Unternehmen, an Werktagen zur gewählten Uhrzeit |
 
 Deutsch funktioniert durchgehend: Umlaute, Schreibweisen wie „Muenchen",
 deutsche Datumsangaben („01.08.2026", „seit gestern") und deutsche
@@ -156,9 +164,10 @@ Firmennamen werden verstanden.
 Besucher werden als Unternehmen identifiziert, niemals als Personen;
 Formular-Inhalte werden nicht erfasst. Ansprechpartner stammen aus einer
 separaten Kontaktdatenbank und werden nur auf Ihre ausdrückliche Frage zu
-einem benannten Unternehmen gesucht. Die Besucherdaten sind rein lesend; das
-Freischalten von Kontaktdaten kostet Credits und wird vom KI-Client vor jedem
-Aufruf bestätigt. Der Server ist in Deutschland gehostet, der API-Schlüssel
+einem benannten Unternehmen gesucht. Die Besucherdaten liest der Assistent
+nur; das Freischalten von Kontaktdaten kostet Credits, und die vier
+Einrichtungs-Tools ändern Ihr Konto nur auf Ihre Anweisung — beides bestätigt
+der KI-Client vor jedem Aufruf. Zahlung und Abo bleiben im Dashboard. Der Server ist in Deutschland gehostet, der API-Schlüssel
 bleibt in Ihrer lokalen Client-Konfiguration.
 
 ### Fehlerbilder
@@ -180,9 +189,11 @@ Fragen? support@webmetic.de · Dokumentation: https://webmetic.de/mcp
 
 Webmetic identifies the companies visiting your website. Through this MCP
 server your AI assistant answers questions like "which companies visited
-our website this week?" live from your Webmetic data. Visitor data is
-read-only; on request the assistant also finds contacts at an identified
-company and reveals an e-mail or phone number from your credit balance.
+our website this week?" live from your Webmetic data. Visitor data is only
+read; on request the assistant also finds contacts at an identified
+company, reveals an e-mail or phone number from your credit balance, and
+sets up your account: target profile, contacts, users, e-mail alerts. A new
+account is created right in the sign-in window.
 
 The server is hosted at `mcp.webmetic.de` — there is nothing to install.
 This repository ships the official Claude Code plugin and the setup for
@@ -231,7 +242,8 @@ needed, sign-in happens in the browser.
 
 No API key needed: add `https://mcp.webmetic.de/mcp` as a custom
 connector (ChatGPT: enable developer mode, authentication **OAuth**),
-click connect, and sign in once with your Webmetic login in the browser.
+click connect, and sign in once with your Webmetic login in the browser (or
+create the account right there).
 
 ### API key (scripts, CI, SSO accounts)
 
@@ -270,6 +282,12 @@ available for SSO yet.
 | `check_accounts` | ABM: match up to 50 target accounts in one call |
 | `find_contacts` | Contacts at one company: name, position, which contact data is on file. Search is free, filters by department and seniority |
 | `reveal_contact` | Reveal a contact's e-mail (with LinkedIn) or phone number: 2 or 8 credits from your balance, the client asks before every call |
+| `get_account_status` | Is the account ready? Websites with first and last visit, plan, target profile, contact consent, users, alerts, credits |
+| `check_tracking_setup` | Is the tracking code on the website, does it belong to this account, does it load before the cookie banner? Opens your own website in a real browser |
+| `set_target_profile` | Save a website's target profile (industries, size, revenue, region, goal page); Webmetic re-rates every identified company |
+| `enable_contacts` | Enable contacts: record the consent and credit the welcome credits, after your explicit yes |
+| `invite_user` | Add a login for a colleague; the password comes by e-mail |
+| `create_email_alert` | Create an e-mail alert: new, returning or intensive visitors, on workdays at the chosen hour |
 
 German input works throughout: umlauts, spellings like "Muenchen", German
 date formats ("01.08.2026", "seit gestern"), and German company names are
@@ -280,8 +298,9 @@ all understood — and so is English.
 Visitors are identified as companies, never as persons; form contents are
 not captured. Contacts come from a separate contact database and are only
 looked up when you explicitly ask for them at a named company. Visitor data
-is read-only; revealing contact data costs credits and is confirmed by your
-AI client before every call. The server is hosted in Germany and your API
+is only read; revealing contact data costs credits, and the four setup tools
+change your account only on your instruction — your AI client confirms both
+before every call. Payment and subscription stay in the dashboard. The server is hosted in Germany and your API
 key stays in your local client configuration.
 
 ### Troubleshooting
