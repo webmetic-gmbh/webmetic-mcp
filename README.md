@@ -51,7 +51,7 @@ Das Plugin bringt den MCP-Server und sieben fertige Skills mit:
 | `getting-started` | Einrichtung: prüft Konto und Tracking-Code, gibt den Code mit, wenn er fehlt, danach eine echte Auswertung | „Richte Webmetic für mich ein." |
 | `wochenbericht` | Wochenbericht: Unternehmen, Top-Seiten, Quellen, Kaufsignale, Empfehlungen | „Erstell mir den Wochenbericht." |
 | `hot-leads` | Rangliste der kaufbereitesten Unternehmen, jede Einstufung mit Verhalten belegt | „Wen soll der Vertrieb diese Woche anrufen?" |
-| `abm-check` | Zielkundenliste gegen die Besucher abgleichen, bis zu 50 auf einmal | „Prüf meine Zielkundenliste: BMW, Siemens, Krones …" |
+| `abm-check` | Zielkundenliste gegen die Besucher abgleichen, bis zu 50 auf einmal | „Prüf meine Zielkundenliste: Kronfeld Chemie, Hagedorn Papierwerke, Rotorwerk …" |
 | `ansprechpartner` | Ansprechpartner bei einem Unternehmen, das die Website besucht hat; E-Mail oder Rufnummer nur auf Wunsch (Credits) | „Wen kann ich bei Musterbau anrufen?" |
 | `unternehmens-brief` | Steckbrief zu einem Unternehmen: Profil, Besuchsverlauf, Interessen, Einstufung, nächster Schritt | „Was wissen wir über Musterbau?" |
 | `ansprache-vorbereitung` | Belegte Gesprächsaufhänger für die Ansprache eines besuchenden Unternehmens | „Wie spreche ich Musterbau an?" |
@@ -233,7 +233,7 @@ The plugin ships the MCP server plus seven ready-made skills:
 | `getting-started` | Setup: checks the account and the tracking code, hands over the code when it is missing, then shows real output | "Set up Webmetic for me." |
 | `wochenbericht` | Weekly report: companies, top pages, sources, buying signals, recommendations | "Build me the weekly report." |
 | `hot-leads` | Ranks the most sales-ready companies, every rating backed by observed behavior | "Who should sales call this week?" |
-| `abm-check` | Matches a target-account list against your visitors, up to 50 at once | "Check my target accounts: BMW, Siemens, Krones …" |
+| `abm-check` | Matches a target-account list against your visitors, up to 50 at once | "Check my target accounts: Kronfeld Chemie, Hagedorn Papierwerke, Rotorwerk …" |
 | `ansprechpartner` | Contacts at a company that visited your website; e-mail or phone only on request (credits) | "Who can I call at Musterbau?" |
 | `unternehmens-brief` | Brief on one company: profile, visit history, interests, rating, next step | "What do we know about Musterbau?" |
 | `ansprache-vorbereitung` | Grounded talking points for reaching out to a visiting company | "How do I approach Musterbau?" |
