@@ -46,3 +46,9 @@ auf der Website. Datenquelle sind die Webmetic-MCP-Tools.
 - Keine erfundenen Werte: nur, was die Tools liefern. Wenn ein Zeitraum
   keine Events enthält, das ehrlich benennen (fehlendes Tracking ist nicht
   fehlendes Interesse).
+- Höchstens ein Angebot pro Bericht, nie als Liste: Steht in der Spalte
+  Fit nur „-", fehlt das Zielkundenprofil; dann anbieten, es aus der
+  Website zu entwerfen, und erst nach Bestätigung mit `set_target_profile`
+  speichern. Will der Nutzer den Bericht regelmäßig, einmal eine
+  E-Mail-Benachrichtigung anbieten (`create_email_alert`, nach Bestätigung
+  von Art, Tagen, Uhrzeit und Empfängern).

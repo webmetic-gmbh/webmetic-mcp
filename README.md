@@ -27,7 +27,9 @@ Webmetic-Daten. Die Besucherdaten liest er nur; auf Wunsch findet der
 Assistent zusätzlich Ansprechpartner bei einem erkannten Unternehmen,
 schaltet E-Mail oder Rufnummer aus Ihrem Credit-Guthaben frei und richtet
 Ihr Konto ein: Zielkundenprofil, Ansprechpartner, Benutzer,
-Benachrichtigungen. Ein Konto legen Sie direkt im Anmeldefenster an.
+Benachrichtigungen. Die Tags Ihrer Unternehmen (etwa „Kunde") zeigt er an,
+filtert danach und vergibt oder entfernt sie auf Ihre Anweisung. Ein Konto
+legen Sie direkt im Anmeldefenster an.
 
 Der Server läuft gehostet unter `mcp.webmetic.de` — es gibt nichts zu
 installieren. Dieses Repository enthält das offizielle Claude-Code-Plugin
@@ -42,14 +44,17 @@ rohe Schlüssel, ohne „Bearer"-Präfix. Behandeln Sie ihn wie ein Passwort.
 
 ### Claude Code: Plugin (empfohlen)
 
-Das Plugin bringt den MCP-Server und vier fertige Skills mit:
+Das Plugin bringt den MCP-Server und sieben fertige Skills mit:
 
 | Skill | Was er tut | Beispiel-Frage |
 |---|---|---|
+| `getting-started` | Einrichtung: prüft Konto und Tracking-Code, gibt den Code mit, wenn er fehlt, danach eine echte Auswertung | „Richte Webmetic für mich ein." |
 | `wochenbericht` | Wochenbericht: Unternehmen, Top-Seiten, Quellen, Kaufsignale, Empfehlungen | „Erstell mir den Wochenbericht." |
 | `hot-leads` | Rangliste der kaufbereitesten Unternehmen, jede Einstufung mit Verhalten belegt | „Wen soll der Vertrieb diese Woche anrufen?" |
 | `abm-check` | Zielkundenliste gegen die Besucher abgleichen, bis zu 50 auf einmal | „Prüf meine Zielkundenliste: BMW, Siemens, Krones …" |
 | `ansprechpartner` | Ansprechpartner bei einem Unternehmen, das die Website besucht hat; E-Mail oder Rufnummer nur auf Wunsch (Credits) | „Wen kann ich bei Musterbau anrufen?" |
+| `unternehmens-brief` | Steckbrief zu einem Unternehmen: Profil, Besuchsverlauf, Interessen, Einstufung, nächster Schritt | „Was wissen wir über Musterbau?" |
+| `ansprache-vorbereitung` | Belegte Gesprächsaufhänger für die Ansprache eines besuchenden Unternehmens | „Wie spreche ich Musterbau an?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -127,6 +132,7 @@ dort noch nicht verfügbar.
 
 ### Die ersten Fragen
 
+- „Richte Webmetic für mich ein."
 - „Welche Unternehmen waren diese Woche auf unserer Website?"
 - „Wer sind unsere heißesten Leads? Sortiere nach Lead-Score."
 - „Was hat [Unternehmen] bei uns angeschaut?"
@@ -140,9 +146,9 @@ dort noch nicht verfügbar.
 
 | Tool | Beantwortet |
 |---|---|
-| `list_visiting_companies` | Wer war da? Mit Filtern: Lead-Score, Branche, Land, besuchte Seite, Quelle, Event, Kampagne |
+| `list_visiting_companies` | Wer war da? Mit Filtern: Lead-Score, Branche, Land, besuchte Seite, Quelle, Event, Kampagne, Tag (mit oder ohne) |
 | `get_activity_summary` | Top-Seiten, Quellen, Kampagnen, Kaufsignale, Branchen im Zeitraum |
-| `get_company_profile` | Wer ist Unternehmen X? Firmendaten und Kontaktinformationen |
+| `get_company_profile` | Wer ist Unternehmen X? Unternehmensdaten und Kontaktinformationen |
 | `get_company_activity` | Was hat X angesehen? Kompletter Besuchsverlauf inklusive Events |
 | `get_visit_highlights` | Intensive Besuche, wiederkehrende Besucher, Erstbesucher |
 | `check_accounts` | ABM: bis zu 50 Zielkunden in einem Aufruf abgleichen |
@@ -154,10 +160,20 @@ dort noch nicht verfügbar.
 | `enable_contacts` | Ansprechpartner freischalten: Einwilligung speichern und Willkommens-Credits gutschreiben, nach Ihrem ausdrücklichen Ja |
 | `invite_user` | Einen Benutzer anlegen; das Passwort kommt per E-Mail |
 | `create_email_alert` | Eine E-Mail-Benachrichtigung anlegen: neue, wiederkehrende oder interessierte Unternehmen, an Werktagen zur gewählten Uhrzeit |
+| `list_tags` | Welche Tags gibt es? Je Tag die Zahl der Unternehmen und ob er von Hand, automatisch über die API oder von einem Segment gesetzt wurde |
+| `tag_companies` | Unternehmen per Domain oder company_id einen Tag geben, bis zu 500 je Aufruf, auch vor dem ersten Besuch. Ein neuer Tag-Name legt den Tag an, der Assistent sagt dann Bescheid |
+| `untag_companies` | Einen Tag von Unternehmen entfernen; der Tag selbst bleibt. Der Client fragt vorher nach |
+| `search_docs` | Wie geht X in Webmetic? Durchsucht die Dokumentation auf webmetic.de/docs, Deutsch oder Englisch |
+| `get_doc_page` | Eine Seite der Dokumentation als Markdown, damit der Assistent mit den genauen Schritten antwortet |
 
 Deutsch funktioniert durchgehend: Umlaute, Schreibweisen wie „Muenchen",
 deutsche Datumsangaben („01.08.2026", „seit gestern") und deutsche
-Firmennamen werden verstanden.
+Unternehmensnamen werden verstanden.
+
+Dazu bringt der Server sechs fertige Prompts mit, in claude.ai im
+„+"-Menü des Connectors: `wochenbericht`, `heisse-leads`,
+`unternehmens-analyse`, `zielkunden-check`, `ansprechpartner` und
+`einrichten` („Richte Webmetic für mich ein").
 
 ### Datenschutz
 
@@ -166,8 +182,8 @@ Formular-Inhalte werden nicht erfasst. Ansprechpartner stammen aus einer
 separaten Kontaktdatenbank und werden nur auf Ihre ausdrückliche Frage zu
 einem benannten Unternehmen gesucht. Die Besucherdaten liest der Assistent
 nur; das Freischalten von Kontaktdaten kostet Credits, und die vier
-Einrichtungs-Tools ändern Ihr Konto nur auf Ihre Anweisung — beides bestätigt
-der KI-Client vor jedem Aufruf. Zahlung und Abo bleiben im Dashboard. Der Server ist in Deutschland gehostet, der API-Schlüssel
+Einrichtungs-Tools sowie die beiden Tag-Tools ändern Ihr Konto nur auf Ihre
+Anweisung. Beides bestätigt der KI-Client vor jedem Aufruf. Zahlung und Abo bleiben im Dashboard. Der Server ist in Deutschland gehostet, der API-Schlüssel
 bleibt in Ihrer lokalen Client-Konfiguration.
 
 ### Fehlerbilder
@@ -176,8 +192,8 @@ bleibt in Ihrer lokalen Client-Konfiguration.
 |---|---|
 | „API key was rejected" | Schlüssel prüfen: roh, ohne „Bearer", frisch aus dem Dashboard kopiert |
 | „not authorized for domain" | Domain-Schreibweise muss exakt dem Konto entsprechen (`www.`, Subdomain) |
-| „0 identified companies" | Kein Fehler: im Zeitraum gab es keine identifizierbaren Besuche. Zeitraum vergrößern |
-| „Complete the contact setup" | Ansprechpartner einmalig im Dashboard einrichten (Zielgruppe und Einwilligung), das schaltet auch die Willkommens-Credits frei |
+| „0 identified companies" | Kein Fehler: im Zeitraum gab es keine identifizierbaren Besuche. Zeitraum vergrößern; kommt nie etwas an, prüft `check_tracking_setup` den Tracking-Code |
+| „The contact setup is not done yet" | Ansprechpartner im Chat freischalten: Der Assistent zeigt die drei Zustimmungen und ruft `enable_contacts` nach Ihrem Ja auf; das schreibt auch die Willkommens-Credits gut |
 | „Not enough credits" | Guthaben im Dashboard aufladen; Suchen bleiben kostenlos, nur das Freischalten kostet |
 | Verbindung schlägt fehl | `https://mcp.webmetic.de/mcp` exakt so verwenden (mit `/mcp` am Ende) |
 
@@ -192,8 +208,10 @@ server your AI assistant answers questions like "which companies visited
 our website this week?" live from your Webmetic data. Visitor data is only
 read; on request the assistant also finds contacts at an identified
 company, reveals an e-mail or phone number from your credit balance, and
-sets up your account: target profile, contacts, users, e-mail alerts. A new
-account is created right in the sign-in window.
+sets up your account: target profile, contacts, users, e-mail alerts. It
+shows your company tags (e.g. "Customer"), filters by them, and adds or
+removes them on your instruction. A new account is created right in the
+sign-in window.
 
 The server is hosted at `mcp.webmetic.de` — there is nothing to install.
 This repository ships the official Claude Code plugin and the setup for
@@ -208,14 +226,17 @@ raw key, no "Bearer" prefix. Treat it like a password.
 
 ### Claude Code: plugin (recommended)
 
-The plugin ships the MCP server plus four ready-made skills:
+The plugin ships the MCP server plus seven ready-made skills:
 
 | Skill | What it does | Example prompt |
 |---|---|---|
+| `getting-started` | Setup: checks the account and the tracking code, hands over the code when it is missing, then shows real output | "Set up Webmetic for me." |
 | `wochenbericht` | Weekly report: companies, top pages, sources, buying signals, recommendations | "Build me the weekly report." |
 | `hot-leads` | Ranks the most sales-ready companies, every rating backed by observed behavior | "Who should sales call this week?" |
 | `abm-check` | Matches a target-account list against your visitors, up to 50 at once | "Check my target accounts: BMW, Siemens, Krones …" |
 | `ansprechpartner` | Contacts at a company that visited your website; e-mail or phone only on request (credits) | "Who can I call at Musterbau?" |
+| `unternehmens-brief` | Brief on one company: profile, visit history, interests, rating, next step | "What do we know about Musterbau?" |
+| `ansprache-vorbereitung` | Grounded talking points for reaching out to a visiting company | "How do I approach Musterbau?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -261,6 +282,7 @@ available for SSO yet.
 
 ### First questions to ask
 
+- "Set up Webmetic for me."
 - "Which companies visited our website this week?"
 - "Who are our hottest leads? Sort by lead score."
 - "What did [company] look at on our site?"
@@ -274,7 +296,7 @@ available for SSO yet.
 
 | Tool | Answers |
 |---|---|
-| `list_visiting_companies` | Who visited? Filters: lead score, industry, country, visited page, source, event, campaign |
+| `list_visiting_companies` | Who visited? Filters: lead score, industry, country, visited page, source, event, campaign, tag (with or without) |
 | `get_activity_summary` | Top pages, sources, campaigns, buying signals, industries for a period |
 | `get_company_profile` | Who is company X? Firmographics and contact details |
 | `get_company_activity` | What did X look at? Full visit trail including events |
@@ -288,10 +310,21 @@ available for SSO yet.
 | `enable_contacts` | Enable contacts: record the consent and credit the welcome credits, after your explicit yes |
 | `invite_user` | Add a login for a colleague; the password comes by e-mail |
 | `create_email_alert` | Create an e-mail alert: new, returning or intensive visitors, on workdays at the chosen hour |
+| `list_tags` | Which tags exist? Per tag the number of companies and whether it was set by hand, automatically via the API or by a segment |
+| `tag_companies` | Tag companies by domain or company_id, up to 500 per call, even before their first visit. A new tag name creates the tag, and the assistant tells you |
+| `untag_companies` | Remove a tag from companies; the tag itself stays. The client asks before the call |
+| `search_docs` | How does X work in Webmetic? Searches the documentation at webmetic.de/docs, German or English |
+| `get_doc_page` | One documentation page as Markdown, so the assistant answers with the exact steps |
 
 German input works throughout: umlauts, spellings like "Muenchen", German
 date formats ("01.08.2026", "seit gestern"), and German company names are
 all understood — and so is English.
+
+The server also ships six ready-made prompts, in claude.ai under the
+connector's "+" menu: `wochenbericht` (weekly report), `heisse-leads`
+(hot leads), `unternehmens-analyse` (company analysis), `zielkunden-check`
+(target-account check), `ansprechpartner` (contacts) and `einrichten`
+(set up Webmetic).
 
 ### Privacy
 
@@ -299,7 +332,7 @@ Visitors are identified as companies, never as persons; form contents are
 not captured. Contacts come from a separate contact database and are only
 looked up when you explicitly ask for them at a named company. Visitor data
 is only read; revealing contact data costs credits, and the four setup tools
-change your account only on your instruction — your AI client confirms both
+and the two tag tools change your account only on your instruction — your AI client confirms both
 before every call. Payment and subscription stay in the dashboard. The server is hosted in Germany and your API
 key stays in your local client configuration.
 
@@ -309,8 +342,8 @@ key stays in your local client configuration.
 |---|---|
 | "API key was rejected" | Check the key: raw, no "Bearer", freshly copied from the dashboard |
 | "not authorized for domain" | Domain spelling must exactly match your account (`www.`, subdomain) |
-| "0 identified companies" | Not an error: no identifiable visits in the period. Widen the date range |
-| "Complete the contact setup" | Set up contacts once in the dashboard (target group and consent); this also unlocks the welcome credits |
+| "0 identified companies" | Not an error: no identifiable visits in the period. Widen the date range; if nothing ever arrives, `check_tracking_setup` checks the tracking code |
+| "The contact setup is not done yet" | Enable contacts in the chat: the assistant shows the three consents and calls `enable_contacts` after your yes; this also credits the welcome credits |
 | "Not enough credits" | Top up credits in the dashboard; searches stay free, only revealing costs |
 | Connection fails | Use `https://mcp.webmetic.de/mcp` exactly (with `/mcp` at the end) |
 

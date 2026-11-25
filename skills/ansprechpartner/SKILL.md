@@ -1,6 +1,6 @@
 ---
 name: ansprechpartner
-description: Findet Ansprechpartner bei einem Unternehmen, das die Website besucht hat, und schaltet auf Wunsch E-Mail oder Rufnummer frei (kostet Credits). Nutzen bei "wen kann ich dort anrufen", "Ansprechpartner bei", "E-Mail von", "Entscheider bei". / Finds contacts at a company that visited the website and reveals e-mail or phone on request (costs credits). Use for "who can I call there", "contacts at", "e-mail of", "decision makers at".
+description: Findet Ansprechpartner bei einem Unternehmen, das die Website besucht hat, und schaltet E-Mail oder Rufnummer nur auf ausdrückliche Anfrage frei (kostet Credits). Nutzen bei "wen kann ich dort anrufen", "Ansprechpartner bei", "E-Mail von", "Entscheider bei". / Finds contacts at a company that visited the website and reveals e-mail or phone only when explicitly requested (costs credits). Use for "who can I call there", "contacts at", "e-mail of", "decision makers at".
 ---
 
 # Ansprechpartner
@@ -23,14 +23,19 @@ ausdrücklich danach fragt.
    `departments` und `seniority` nur setzen, wenn der Nutzer sie nennt.
    Die Tabelle zeigt Name, Position und welche Daten vorliegen
    („available") oder bereits freigeschaltet sind.
-3. **Freischalten nur auf Wunsch** mit `reveal_contact`, ein Kontakt pro
-   Aufruf: `reveal="email"` liefert E-Mail und LinkedIn (2 Credits),
-   `"phone"` Direktwahl und Mobil (8 Credits), `"both"` beides (10). Vor
+   Meldet das Tool, dass die Ansprechpartner noch nicht freigeschaltet
+   sind, geschieht das hier im Chat: die drei Zustimmungen aus
+   `enable_contacts` zeigen, das Tool erst nach dem ausdrücklichen Ja des
+   Nutzers aufrufen und danach die Suche wiederholen.
+3. **Freischalten nur auf ausdrücklichen Wunsch** mit `reveal_contact`, ein
+   Kontakt pro Aufruf. `reveal="email"` liefert E-Mail und LinkedIn
+   (2 Credits), `"phone"` Direktwahl und Mobil (8 Credits), `"both"`
+   beides (10). Nur den vom Nutzer verlangten Datentyp anfordern und vor
    dem Aufruf sagen, was es kostet. Bereits freigeschaltete Daten kommen
    kostenlos, sie stehen auch in späteren `find_contacts`-Tabellen.
-4. **Ergebnis ausgeben:** Person, Position, freigeschaltete Daten, Rest
-   des Guthabens. Reicht das Guthaben nicht, auf das Dashboard
-   (app.webmetic.de) verweisen.
+4. **Ergebnis ausgeben:** Person, Position, die ausdrücklich angeforderten
+   Kontaktdaten und der Rest des Guthabens. Nicht verfügbare Daten
+   sachlich benennen.
 
 ## Regeln
 
@@ -38,6 +43,8 @@ ausdrücklich danach fragt.
   Ansprechpartner holen. Ein Unternehmen, das der Nutzer nennt.
 - Nichts freischalten, was der Nutzer nicht verlangt hat; „Ansprechpartner
   zeigen" heißt suchen, nicht freischalten.
+- Ist unklar, ob E-Mail, Rufnummer oder beides gewünscht ist, vor dem
+  Freischalten nachfragen.
 - Kontaktdaten nur wiedergeben, wie das Tool sie liefert. Keine E-Mails
   aus Namensmustern erraten.
 - In der Sprache des Nutzers antworten. Auf Deutsch: „Unternehmen" statt

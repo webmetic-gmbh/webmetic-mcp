@@ -1,6 +1,6 @@
 ---
 name: hot-leads
-description: Findet die heißesten Leads anhand von Kaufsignalen (Formular-Submits, Kontakt-Klicks, Downloads, Preisseiten-Besuche, hoher Lead-Score). Nutzen bei "heiße Leads", "wer ist kaufbereit", "wen soll der Vertrieb anrufen". / Finds the hottest leads based on buying signals (form submits, contact clicks, downloads, pricing-page visits, high lead score). Use for "hot leads", "who is ready to buy", "who should sales call".
+description: Findet die heißesten Leads anhand von Kaufsignalen (Formular-Submits, Kontakt-Klicks, Downloads, Besuche wichtiger Seiten, hoher Lead-Score). Nutzen bei "heiße Leads", "wer ist kaufbereit", "wen soll der Vertrieb anrufen". / Finds the hottest leads based on buying signals (form submits, contact clicks, downloads, high-intent page visits, and lead score). Use for "hot leads", "who is ready to buy", "who should sales call".
 ---
 
 # Heiße Leads
@@ -45,3 +45,8 @@ jede Einstufung mit konkretem Verhalten.
   das jeweilige Unternehmen `find_contacts` nutzen; E-Mail oder Rufnummer
   nur per `reveal_contact` freischalten, wenn der Nutzer das ausdrücklich
   will (kostet Credits).
+- Steht in der Spalte Fit nur „-", ist für die Website kein
+  Zielkundenprofil hinterlegt, und die Relevanz entspricht der Aktivität.
+  Dann einmal anbieten, das Profil aus der Website zu entwerfen; mit
+  `set_target_profile` erst speichern, wenn der Nutzer den Entwurf
+  bestätigt hat.
