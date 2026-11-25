@@ -29,6 +29,8 @@ keine Datengrundlage.
 
 1. **Unternehmen und Besuche holen** mit `get_company_profile` und
    `get_company_activity`, Zeitraum 90 Tage, wenn nichts anderes gesagt wird.
+   Dazu `get_company_notes`: Steht dort schon ein Gespräch, eine Absage oder ein
+   vereinbarter Schritt, darauf aufbauen statt wie beim Erstkontakt anzusetzen.
 2. **Verdichten:** Welche Seiten und Themen, wie oft, wie lange, über welche
    Quelle, welche Ereignisse (Formular, Download, Kontaktklick), und wie sich das
    über die Zeit entwickelt hat.

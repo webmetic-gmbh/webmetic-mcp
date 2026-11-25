@@ -1,6 +1,6 @@
 ---
 name: hot-leads
-description: Findet die heißesten Leads anhand von Kaufsignalen (Formular-Submits, Kontakt-Klicks, Downloads, Besuche wichtiger Seiten, hoher Lead-Score). Nutzen bei "heiße Leads", "wer ist kaufbereit", "wen soll der Vertrieb anrufen". / Finds the hottest leads based on buying signals (form submits, contact clicks, downloads, high-intent page visits, and lead score). Use for "hot leads", "who is ready to buy", "who should sales call".
+description: Findet die heißesten Leads anhand von Kaufsignalen (Formular-Submits, Kontakt-Klicks, Downloads, Besuche wichtiger Seiten, hohe oder steigende Relevanz). Nutzen bei "heiße Leads", "wer ist kaufbereit", "wen soll der Vertrieb anrufen". / Finds the hottest leads based on buying signals (form submits, contact clicks, downloads, high-intent page visits, and high or rising relevance). Use for "hot leads", "who is ready to buy", "who should sales call".
 ---
 
 # Heiße Leads
@@ -29,17 +29,25 @@ jede Einstufung mit konkretem Verhalten.
    - `visited_page` mit dem Pfad der Preisseite. Den echten Pfad vorher in
      den Top-Seiten von `get_activity_summary` nachsehen (z. B. `/pricing`
      oder `/preise`), nicht raten.
-   - `sort="lead_score"`, `min_lead_score=70` — Webmetic-Score als Basis
-     (Skala 0 bis 100, ab 70 gilt ein Lead als stark)
+   - `sort="relevance"`, `limit=25` — die Rangfolge nach Relevanz
+     (Passung zum Zielkundenprofil mal Aktivität, Skala 0 bis 100, ab 70
+     heiß, ab 50 hoch). Relevanz ist die Zahl, nach der eingestuft wird,
+     nicht die Aktivität allein.
+   - `get_score_changes` für denselben Zeitraum: Unternehmen, die neu heiß
+     sind oder deren Relevanz deutlich gestiegen ist, sind ein „Warum
+     jetzt". Meldet das Tool, dass der Verlauf erst später beginnt, ohne
+     diesen Baustein weiterarbeiten.
 4. **Ranking bilden.** Gewichte grob: Formular-Submit > Kontakt-Klick >
-   Preisseite > Download > hoher Lead-Score allein. Wiederkehrende
+   Preisseite > Download > hohe Relevanz allein. Innerhalb einer Stufe
+   entscheidet die Relevanz; neu heiße oder stark steigende Unternehmen
+   eine Stufe höher einordnen. Wiederkehrende
    Unternehmen (mehrere Sitzungen) höher einstufen. Trackt die Domain
-   keine Events (alle Event-Filter leer), auf Preisseite, Lead-Score und
+   keine Events (alle Event-Filter leer), auf Preisseite, Relevanz und
    Besuchsintensität ausweichen und das im Ergebnis erwähnen.
 5. **Top 3 vertiefen** mit `get_company_activity`: Was genau wurde
    angesehen, wie lange, welche Events, über welche Quelle kam das
    Unternehmen?
-6. **Ergebnis ausgeben:** Rangliste mit je einer Zeile Begründung
+6. **Ergebnis ausgeben:** Rangliste mit Relevanz und je einer Zeile Begründung
    („Formular auf /kontakt abgeschickt, davor 6 Minuten auf der
    Preisseite") plus empfohlenem nächsten Schritt pro Lead. Darunter eine
    Zeile, welche Tags ausgeblendet wurden („Bestandskunden mit den Tags

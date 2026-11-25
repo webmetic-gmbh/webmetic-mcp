@@ -38,11 +38,19 @@ Nicht auslösen bei einer Liste oder einer Rangfolge über viele Besucher — da
    meistbesuchte Seiten, Quellen, Ereignisse (Formular, Download, Kontaktklick),
    und ein Trend aus dem Vergleich der letzten 30 Tage mit den 30 davor:
    zunehmend, gleichbleibend, abnehmend oder eingeschlafen.
-3. **Einstufung einordnen.** Relevanz ist die Zahl, nach der sortiert wird. Sie
-   verbindet die Passung zum Zielkundenprofil mit der Aktivität auf der
-   Website. Ohne hinterlegtes Profil entspricht die Relevanz der Aktivität; dann
-   das auch so sagen statt eine Passung zu behaupten.
-4. **Brief ausgeben** nach dem festen Format unten.
+3. **Einstufung erklären** mit `explain_company_score`, gleicher Zeitraum.
+   Relevanz ist die Zahl, nach der sortiert wird. Sie verbindet die Passung zum
+   Zielkundenprofil mit der Aktivität auf der Website. Aus der Antwort: welche
+   Kriterien der Passung erfüllt sind und welche fehlen oder unbekannt sind, und
+   was die Aktivität trägt. Ohne hinterlegtes Profil entspricht die Relevanz der
+   Aktivität; dann das auch so sagen statt eine Passung zu behaupten.
+4. **Kommentare lesen** mit `get_company_notes`: was das Team zu diesem
+   Unternehmen schon festgehalten hat. Die neuesten drei in den Brief, und die
+   Einschätzung darauf abstimmen (z. B. schon im Gespräch, schon abgesagt).
+5. **Brief ausgeben** nach dem festen Format unten.
+6. **Speichern anbieten.** Nach dem Brief einmal anbieten, die Einschätzung und
+   den nächsten Schritt als kurzen Kommentar zu speichern. `add_company_note`
+   erst aufrufen, wenn der Nutzer den Text bestätigt hat.
 
 **Abbruchgründe** (Brief entfällt, stattdessen ein Satz): Unternehmen nicht
 gefunden; im Free-Plan verborgen (dann ist nur bekannt, dass und wann es da war,
@@ -81,7 +89,8 @@ dieselbe Zahl wie im Steckbrief.}
 - **Größe:** {Mitarbeiter} · {Umsatz, wenn vorhanden}
 - **Sitz:** {Ort, Land}
 - **Website:** {Domain}
-- **Einstufung:** Relevanz {Wert} — {ein Satz, woher sie kommt}
+- **Einstufung:** Relevanz {Wert} · Passung {Wert}: {welche Kriterien passen, welche
+  fehlen} · Aktivität {Wert}: {was sie trägt}
 
 ## Besuche (letzte {N} Tage)
 - **Besuche:** {Anzahl}
@@ -91,6 +100,9 @@ dieselbe Zahl wie im Steckbrief.}
 - **Kaufsignale:** {Formular, Download, Kontaktklick, je mit Datum — oder "keine"}
 - **Auffällige Besuche:** {z. B. "3 Seiten in einer Sitzung, 71 Sekunden auf /preise"}
 - **Trend:** {zunehmend / gleichbleibend / abnehmend / eingeschlafen} — {ein Satz}
+
+## Kommentare im Team
+- {Datum} · {Autor}: {Kern des Kommentars in einem Satz}
 
 ## Einschätzung und nächster Schritt
 {Ein kurzer Absatz, der die Lage zusammenfasst, dann ein bis zwei konkrete

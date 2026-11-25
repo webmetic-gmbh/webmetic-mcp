@@ -147,12 +147,17 @@ dort noch nicht verfügbar.
 
 | Tool | Beantwortet |
 |---|---|
-| `list_visiting_companies` | Wer war da? Mit Filtern: Lead-Score, Branche, Land, besuchte Seite, Quelle, Event, Kampagne, Tag (mit oder ohne) |
+| `list_visiting_companies` | Wer war da? Mit Filtern: Lead-Score, Branche, Land, besuchte Seite, Quelle, Event, Kampagne, Tag (mit oder ohne), Segment |
 | `get_activity_summary` | Top-Seiten, Quellen, Kampagnen, Kaufsignale, Branchen im Zeitraum |
 | `get_company_profile` | Wer ist Unternehmen X? Unternehmensdaten und Kontaktinformationen |
 | `get_company_activity` | Was hat X angesehen? Kompletter Besuchsverlauf inklusive Events |
 | `get_visit_highlights` | Intensive Besuche, wiederkehrende Besucher, Erstbesucher |
 | `check_accounts` | ABM: bis zu 50 Zielkunden in einem Aufruf abgleichen |
+| `explain_company_score` | Warum hat X diese Relevanz? Fit je Kriterium des Zielkundenprofils und Aktivität je Teil |
+| `get_score_changes` | Wer wird gerade heißer, wer kühlt ab, wer ist neu heiß? Aus dem täglichen Verlauf der Werte |
+| `list_segments` | Die Segmente aus dem Dashboard mit ihren Regeln; ihre Unternehmen über den Segment-Filter |
+| `get_company_notes` | Die Kommentare zu einem Unternehmen, neueste zuerst |
+| `add_company_note` | Einen Kommentar speichern, im Dashboard signiert mit „KI-Assistent", nur nach Ihrem Ja |
 | `find_contacts` | Ansprechpartner bei einem Unternehmen: Name, Position, welche Kontaktdaten vorliegen. Suche kostenlos, Filter nach Abteilung und Seniorität |
 | `reveal_contact` | E-Mail (mit LinkedIn) oder Rufnummer eines Ansprechpartners freischalten: 2 bzw. 8 Credits aus Ihrem Guthaben, der Client fragt vor jedem Aufruf nach |
 | `get_account_status` | Ist das Konto bereit? Websites mit erstem und letztem Besuch, Plan, Zielkundenprofil, Ansprechpartner-Einwilligung, Benutzer, Benachrichtigungen, Credits |
@@ -184,7 +189,7 @@ Formular-Inhalte werden nicht erfasst. Ansprechpartner stammen aus einer
 separaten Kontaktdatenbank und werden nur auf Ihre ausdrückliche Frage zu
 einem benannten Unternehmen gesucht. Die Besucherdaten liest der Assistent
 nur; das Freischalten von Kontaktdaten kostet Credits, und die vier
-Einrichtungs-Tools sowie die beiden Tag-Tools ändern Ihr Konto nur auf Ihre
+Einrichtungs-Tools, die beiden Tag-Tools und das Speichern von Kommentaren ändern Ihr Konto nur auf Ihre
 Anweisung. Beides bestätigt der KI-Client vor jedem Aufruf. Zahlung und Abo bleiben im Dashboard. Der Server ist in Deutschland gehostet, der API-Schlüssel
 bleibt in Ihrer lokalen Client-Konfiguration.
 
@@ -299,12 +304,17 @@ available for SSO yet.
 
 | Tool | Answers |
 |---|---|
-| `list_visiting_companies` | Who visited? Filters: lead score, industry, country, visited page, source, event, campaign, tag (with or without) |
+| `list_visiting_companies` | Who visited? Filters: lead score, industry, country, visited page, source, event, campaign, tag (with or without), segment |
 | `get_activity_summary` | Top pages, sources, campaigns, buying signals, industries for a period |
 | `get_company_profile` | Who is company X? Firmographics and contact details |
 | `get_company_activity` | What did X look at? Full visit trail including events |
 | `get_visit_highlights` | Intensive visits, returning visitors, first-time visitors |
 | `check_accounts` | ABM: match up to 50 target accounts in one call |
+| `explain_company_score` | Why does X have this relevance? Fit per target-profile criterion and activity per part |
+| `get_score_changes` | Who is heating up, who is cooling off, who just became hot? From the daily score history |
+| `list_segments` | The dashboard's segments with their rules; their companies via the segment filter |
+| `get_company_notes` | The comments on a company, newest first |
+| `add_company_note` | Save a comment, signed "KI-Assistent" in the dashboard, only after your yes |
 | `find_contacts` | Contacts at one company: name, position, which contact data is on file. Search is free, filters by department and seniority |
 | `reveal_contact` | Reveal a contact's e-mail (with LinkedIn) or phone number: 2 or 8 credits from your balance, the client asks before every call |
 | `get_account_status` | Is the account ready? Websites with first and last visit, plan, target profile, contact consent, users, alerts, credits |
@@ -336,7 +346,7 @@ Visitors are identified as companies, never as persons; form contents are
 not captured. Contacts come from a separate contact database and are only
 looked up when you explicitly ask for them at a named company. Visitor data
 is only read; revealing contact data costs credits, and the four setup tools
-and the two tag tools change your account only on your instruction — your AI client confirms both
+the two tag tools and saving comments change your account only on your instruction — your AI client confirms both
 before every call. Payment and subscription stay in the dashboard. The server is hosted in Germany and your API
 key stays in your local client configuration.
 
