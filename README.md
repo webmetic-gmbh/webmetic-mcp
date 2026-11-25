@@ -44,17 +44,18 @@ rohe Schlüssel, ohne „Bearer"-Präfix. Behandeln Sie ihn wie ein Passwort.
 
 ### Claude Code: Plugin (empfohlen)
 
-Das Plugin bringt den MCP-Server und sieben fertige Skills mit:
+Das Plugin bringt den MCP-Server und acht fertige Skills mit:
 
 | Skill | Was er tut | Beispiel-Frage |
 |---|---|---|
 | `getting-started` | Einrichtung: prüft Konto und Tracking-Code, gibt den Code mit, wenn er fehlt, danach eine echte Auswertung | „Richte Webmetic für mich ein." |
 | `wochenbericht` | Wochenbericht: Unternehmen, Top-Seiten, Quellen, Kaufsignale, Empfehlungen | „Erstell mir den Wochenbericht." |
-| `hot-leads` | Rangliste der kaufbereitesten Unternehmen, jede Einstufung mit Verhalten belegt | „Wen soll der Vertrieb diese Woche anrufen?" |
+| `hot-leads` | Rangliste der kaufbereitesten Unternehmen ohne Bestandskunden, jede Einstufung mit Verhalten belegt | „Wen soll der Vertrieb diese Woche anrufen?" |
 | `abm-check` | Zielkundenliste gegen die Besucher abgleichen, bis zu 50 auf einmal | „Prüf meine Zielkundenliste: Kronfeld Chemie, Hagedorn Papierwerke, Rotorwerk …" |
 | `ansprechpartner` | Ansprechpartner bei einem Unternehmen, das die Website besucht hat; E-Mail oder Rufnummer nur auf Wunsch (Credits) | „Wen kann ich bei Musterbau anrufen?" |
 | `unternehmens-brief` | Steckbrief zu einem Unternehmen: Profil, Besuchsverlauf, Interessen, Einstufung, nächster Schritt | „Was wissen wir über Musterbau?" |
 | `ansprache-vorbereitung` | Belegte Gesprächsaufhänger für die Ansprache eines besuchenden Unternehmens | „Wie spreche ich Musterbau an?" |
+| `marketing-empfehlungen` | Höchstens 5 Maßnahmen für das Marketing, jede mit der Zahl, auf der sie beruht: Kampagnen, Quellen, Seiten, KI-Assistenten | „Was sollte unser Marketing als Nächstes tun?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -165,6 +166,7 @@ dort noch nicht verfügbar.
 | `untag_companies` | Einen Tag von Unternehmen entfernen; der Tag selbst bleibt. Der Client fragt vorher nach |
 | `search_docs` | Wie geht X in Webmetic? Durchsucht die Dokumentation auf webmetic.de/docs, Deutsch oder Englisch |
 | `get_doc_page` | Eine Seite der Dokumentation als Markdown, damit der Assistent mit den genauen Schritten antwortet |
+| `read_skill` | Liest einen der Skills oben, damit jeder Client (auch ohne Plugin) die wiederkehrenden Fragen nach derselben Anleitung beantwortet |
 
 Deutsch funktioniert durchgehend: Umlaute, Schreibweisen wie „Muenchen",
 deutsche Datumsangaben („01.08.2026", „seit gestern") und deutsche
@@ -226,17 +228,18 @@ raw key, no "Bearer" prefix. Treat it like a password.
 
 ### Claude Code: plugin (recommended)
 
-The plugin ships the MCP server plus seven ready-made skills:
+The plugin ships the MCP server plus eight ready-made skills:
 
 | Skill | What it does | Example prompt |
 |---|---|---|
 | `getting-started` | Setup: checks the account and the tracking code, hands over the code when it is missing, then shows real output | "Set up Webmetic for me." |
 | `wochenbericht` | Weekly report: companies, top pages, sources, buying signals, recommendations | "Build me the weekly report." |
-| `hot-leads` | Ranks the most sales-ready companies, every rating backed by observed behavior | "Who should sales call this week?" |
+| `hot-leads` | Ranks the most sales-ready companies, existing customers left out, every rating backed by observed behavior | "Who should sales call this week?" |
 | `abm-check` | Matches a target-account list against your visitors, up to 50 at once | "Check my target accounts: Kronfeld Chemie, Hagedorn Papierwerke, Rotorwerk …" |
 | `ansprechpartner` | Contacts at a company that visited your website; e-mail or phone only on request (credits) | "Who can I call at Musterbau?" |
 | `unternehmens-brief` | Brief on one company: profile, visit history, interests, rating, next step | "What do we know about Musterbau?" |
 | `ansprache-vorbereitung` | Grounded talking points for reaching out to a visiting company | "How do I approach Musterbau?" |
+| `marketing-empfehlungen` | At most 5 actions for marketing, each with the number behind it: campaigns, sources, pages, AI assistants | "What should our marketing do next?" |
 
 ```
 /plugin marketplace add webmetic-gmbh/webmetic-mcp
@@ -315,6 +318,7 @@ available for SSO yet.
 | `untag_companies` | Remove a tag from companies; the tag itself stays. The client asks before the call |
 | `search_docs` | How does X work in Webmetic? Searches the documentation at webmetic.de/docs, German or English |
 | `get_doc_page` | One documentation page as Markdown, so the assistant answers with the exact steps |
+| `read_skill` | Reads one of the skills above, so every client (also without the plugin) answers the recurring questions by the same playbook |
 
 German input works throughout: umlauts, spellings like "Muenchen", German
 date formats ("01.08.2026", "seit gestern"), and German company names are

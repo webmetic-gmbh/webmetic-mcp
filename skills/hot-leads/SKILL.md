@@ -13,7 +13,15 @@ jede Einstufung mit konkretem Verhalten.
 1. **Domain und Zeitraum klären.** Standard: die letzten 7 Tage; bei wenig
    Verkehr auf 30 Tage erweitern und das im Ergebnis vermerken. Denselben
    Zeitraum in allen Aufrufen verwenden.
-2. **Signale einsammeln** mit `list_visiting_companies` (gleiche Domain,
+2. **Bestandskunden ausblenden.** Standardmäßig zeigt die Liste nur
+   Interessenten. `list_tags` aufrufen und von den Tags `Kunde` und
+   `HubSpot` (die HubSpot-Integration taggt synchronisierte Unternehmen
+   automatisch) nur die übernehmen, die es im Konto gibt. Diese als
+   `exclude_tag` an jeden Aufruf in Schritt 3 geben; einen Tag, den es nicht
+   gibt, nie übergeben (das Tool bricht dann mit einem Fehler ab). Gibt es
+   keinen der beiden, ohne `exclude_tag` weiterarbeiten. Fragt der Nutzer
+   ausdrücklich nach Bestandskunden, diesen Schritt auslassen.
+3. **Signale einsammeln** mit `list_visiting_companies` (gleiche Domain,
    gleicher Zeitraum, mehrere Aufrufe mit unterschiedlichen Filtern):
    - `event="form_submit"` — abgeschickte Formulare (stärkstes Signal)
    - `event="contact_click"` — Klicks auf E-Mail oder Telefonnummer
@@ -23,17 +31,19 @@ jede Einstufung mit konkretem Verhalten.
      oder `/preise`), nicht raten.
    - `sort="lead_score"`, `min_lead_score=70` — Webmetic-Score als Basis
      (Skala 0 bis 100, ab 70 gilt ein Lead als stark)
-3. **Ranking bilden.** Gewichte grob: Formular-Submit > Kontakt-Klick >
+4. **Ranking bilden.** Gewichte grob: Formular-Submit > Kontakt-Klick >
    Preisseite > Download > hoher Lead-Score allein. Wiederkehrende
    Unternehmen (mehrere Sitzungen) höher einstufen. Trackt die Domain
    keine Events (alle Event-Filter leer), auf Preisseite, Lead-Score und
    Besuchsintensität ausweichen und das im Ergebnis erwähnen.
-4. **Top 3 vertiefen** mit `get_company_activity`: Was genau wurde
+5. **Top 3 vertiefen** mit `get_company_activity`: Was genau wurde
    angesehen, wie lange, welche Events, über welche Quelle kam das
    Unternehmen?
-5. **Ergebnis ausgeben:** Rangliste mit je einer Zeile Begründung
+6. **Ergebnis ausgeben:** Rangliste mit je einer Zeile Begründung
    („Formular auf /kontakt abgeschickt, davor 6 Minuten auf der
-   Preisseite") plus empfohlenem nächsten Schritt pro Lead.
+   Preisseite") plus empfohlenem nächsten Schritt pro Lead. Darunter eine
+   Zeile, welche Tags ausgeblendet wurden („Bestandskunden mit den Tags
+   Kunde und HubSpot sind ausgeblendet; auf Wunsch zeige ich sie.").
 
 ## Stil
 

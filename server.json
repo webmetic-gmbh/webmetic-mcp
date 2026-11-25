@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
   "name": "de.webmetic/webmetic",
   "description": "Companies visiting your website, buying signals, reports, contacts (credits) and account setup.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "websiteUrl": "https://webmetic.de/mcp",
   "remotes": [
     {
