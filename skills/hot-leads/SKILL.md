@@ -14,12 +14,12 @@ jede Einstufung mit konkretem Verhalten.
    Verkehr auf 30 Tage erweitern und das im Ergebnis vermerken. Denselben
    Zeitraum in allen Aufrufen verwenden.
 2. **Bestandskunden ausblenden.** Standardmäßig zeigt die Liste nur
-   Interessenten. `list_tags` aufrufen und von den Tags `Kunde` und
-   `HubSpot` (die HubSpot-Integration taggt synchronisierte Unternehmen
-   automatisch) nur die übernehmen, die es im Konto gibt. Diese als
-   `exclude_tag` an jeden Aufruf in Schritt 3 geben; einen Tag, den es nicht
-   gibt, nie übergeben (das Tool bricht dann mit einem Fehler ab). Gibt es
-   keinen der beiden, ohne `exclude_tag` weiterarbeiten. Fragt der Nutzer
+   Interessenten. `list_tags` aufrufen und von den Tags `Kunde`, `Customer`
+   (der Name in englischen Konten) und `HubSpot` (die HubSpot-Integration
+   taggt synchronisierte Unternehmen automatisch) nur die übernehmen, die es
+   im Konto gibt. Diese als `exclude_tag` an jeden Aufruf in Schritt 3 geben;
+   einen Tag, den es nicht gibt, nie übergeben (das Tool bricht dann mit
+   einem Fehler ab). Gibt es keinen davon, ohne `exclude_tag` weiterarbeiten. Fragt der Nutzer
    ausdrücklich nach Bestandskunden, diesen Schritt auslassen.
 3. **Signale einsammeln** mit `list_visiting_companies` (gleiche Domain,
    gleicher Zeitraum, mehrere Aufrufe mit unterschiedlichen Filtern):
@@ -50,8 +50,9 @@ jede Einstufung mit konkretem Verhalten.
 6. **Ergebnis ausgeben:** Rangliste mit Relevanz und je einer Zeile Begründung
    („Formular auf /kontakt abgeschickt, davor 6 Minuten auf der
    Preisseite") plus empfohlenem nächsten Schritt pro Lead. Darunter eine
-   Zeile, welche Tags ausgeblendet wurden („Bestandskunden mit den Tags
-   Kunde und HubSpot sind ausgeblendet; auf Wunsch zeige ich sie.").
+   Zeile, welche Tags ausgeblendet wurden, mit ihren Namen im Konto
+   („Bestandskunden mit den Tags Kunde und HubSpot sind ausgeblendet; auf
+   Wunsch zeige ich sie.").
 
 ## Stil
 

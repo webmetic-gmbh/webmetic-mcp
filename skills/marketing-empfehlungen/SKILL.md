@@ -18,8 +18,9 @@ liest nur und ändert nichts im Konto.
 - **Bewertet** ist eine Zeile mit einer Zahl in der Spalte Fit. Zeilen mit
   Fit „-" und verborgene Zeilen (`[hidden]`, Free-Plan) zählen in keinem
   Anteil mit.
-- **Bestandskunden:** Unternehmen mit dem Tag `Kunde` oder `HubSpot` (die
-  HubSpot-Integration taggt synchronisierte Unternehmen automatisch).
+- **Bestandskunden:** Unternehmen mit dem Tag `Kunde`, `Customer` (der Name
+  in englischen Konten) oder `HubSpot` (die HubSpot-Integration taggt
+  synchronisierte Unternehmen automatisch).
 - **KI-Assistenten:** Quellen, die `chatgpt`, `perplexity`, `gemini`,
   `claude` oder `copilot` enthalten. Sie kommen als `utm_source` (etwa
   `chatgpt.com`) oder als Referrer (`perplexity.ai`,
@@ -40,9 +41,9 @@ der Nutzer andere, gelten seine.
    Sitzungen, der Abschnitt „Campaigns (T of N sessions tagged)" mit den
    Kampagnen, „Intent events" und „Industries". Fehlt ein Abschnitt, gibt
    es im Zeitraum nichts davon.
-3. **Tags.** `list_tags` aufrufen. Von `Kunde` und `HubSpot` nur die Tags
-   verwenden, die es im Konto gibt; ein unbekannter Tag in `tag` oder
-   `exclude_tag` bricht den Aufruf mit einem Fehler ab.
+3. **Tags.** `list_tags` aufrufen. Von `Kunde`, `Customer` und `HubSpot`
+   nur die Tags verwenden, die es im Konto gibt; ein unbekannter Tag in
+   `tag` oder `exclude_tag` bricht den Aufruf mit einem Fehler ab.
 4. **Kampagnen und Quellen.** Für die bis zu 3 größten Kampagnen
    `list_visiting_companies(campaign="<Name>", sort="relevance", limit=50)`,
    für die bis zu 3 größten Quellen außer `(direct)`
